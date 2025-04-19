@@ -1,6 +1,22 @@
 package org.eleve.challenge.infrastructure.exchangerate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
-public record ExchangeRateApiResponse(String result, BigDecimal conversion_rate, String base_code, String target_code) {
+@Getter
+public class ExchangeRateApiResponse {
+
+    private String result;
+
+    @JsonProperty("conversion_rate")
+    private BigDecimal conversionRate;
+
+    @JsonProperty("base_code")
+    private String baseCode;
+
+    @JsonProperty("target_code")
+    private String targetCode;
+
 }

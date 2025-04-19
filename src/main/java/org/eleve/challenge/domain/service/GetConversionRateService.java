@@ -20,10 +20,10 @@ public class GetConversionRateService implements GetConversionRateUseCase {
 
     @Override
     public ExchangeRateResponse handle(String rateBase, String rateTarget) {
-        var date = LocalDateTime.now().toString();
+        var dateConsultation = LocalDateTime.now();
         var result = exchangeRateApiRestClient.pairConversion(rateBase, rateTarget);
 
-        return ExchangeRateAssembler.toExchangeRateResponse(result, date);
+        return ExchangeRateAssembler.toExchangeRateResponse(result, dateConsultation);
     }
 
 }
