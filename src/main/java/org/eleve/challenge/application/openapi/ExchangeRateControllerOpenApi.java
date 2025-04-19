@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eleve.challenge.application.dto.ExchangeRateResponse;
-import org.eleve.challenge.domain.common.ErrorResponse;
+import org.eleve.challenge.domain.exception.ErrorResponse;
 
 @Path("/exchange-rate")
 @Tag(name = "Exchange Rate")
