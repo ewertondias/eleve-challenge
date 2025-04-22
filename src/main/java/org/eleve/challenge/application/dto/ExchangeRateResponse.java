@@ -6,10 +6,14 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
 public class ExchangeRateResponse {
+
+    @Schema(description = "Id exchange rate", examples = "3f6f778e-9f68-4858-9424-669113f03baf")
+    private UUID id;
 
     @Schema(description = "Base currency", examples = "BRL")
     private String rateBase;

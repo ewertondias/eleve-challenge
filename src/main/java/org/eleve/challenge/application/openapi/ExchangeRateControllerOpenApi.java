@@ -1,5 +1,6 @@
 package org.eleve.challenge.application.openapi;
 
+import jakarta.validation.constraints.Size;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -34,6 +35,10 @@ public interface ExchangeRateControllerOpenApi {
     })
     @GET
     @Path("/conversion/{rate-base}/{rate-target}")
-    Response getConversionRate(@PathParam("rate-base") String rateBase, @PathParam("rate-target") String rateTarget);
+    Response getConversionRate(@Size(min = 3, max = 3, message = "{currency.size}")
+                               @PathParam("rate-base") String rateBase,
+
+                               @Size(min = 3, max = 3, message = "{currency.size}")
+                               @PathParam("rate-target") String rateTarget);
 
 }
