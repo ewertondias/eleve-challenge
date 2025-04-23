@@ -5,20 +5,20 @@
 ## Requisitos
 
 O projeto faz uso de:
-`Docker 27.4.0`
-`Docker Compose v2.31.0`
 `Quarkus 3.21.3`
 `JDK 21`
 `Maven 3.9.6`
+`Docker 27.4.0`
+`Docker Compose v2.31.0`
 
-- [Docker](https://docs.docker.com/get-started/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
 - [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 - [Maven](https://maven.apache.org/download.cgi)
 - [Flyway](https://flywaydb.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [TestContainers](https://testcontainers.com/)
 - [WireMock](https://wiremock.org/)
+- [Docker](https://docs.docker.com/get-started/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ---
 
