@@ -11,6 +11,7 @@ O projeto faz uso de:
 `Docker 27.4.0`
 `Docker Compose v2.31.0`
 
+- [Quarkus](https://quarkus.io/)
 - [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 - [Maven](https://maven.apache.org/download.cgi)
 - [Flyway](https://flywaydb.org/)
