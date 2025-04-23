@@ -1,9 +1,7 @@
-package org.eleve.challenge.domain.application;
+package org.eleve.challenge.domain.service;
 
-import jakarta.ws.rs.core.Response;
-import org.eleve.challenge.application.ExchangeRateController;
+import org.eleve.challenge.domain.exception.ErrorConsultingRateException;
 import org.eleve.challenge.domain.repository.ExchangeRepository;
-import org.eleve.challenge.domain.service.GetConversionRateService;
 import org.eleve.challenge.domain.util.ExchangeRateTestFactory;
 import org.eleve.challenge.infrastructure.exchangerate.ExchangeRateApiRestClient;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,17 +11,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @DisplayName("Get Conversion Rate - Service")
 @ExtendWith(MockitoExtension.class)
-class ExchangeRateControllerTest {
+class GetConversionRateServiceTest {
 
-    ExchangeRateController exchangeRateController;
+    GetConversionRateService getConversionRateService;
 
     @Mock
     ExchangeRateApiRestClient exchangeRateApiRestClient;
@@ -33,8 +30,7 @@ class ExchangeRateControllerTest {
 
     @BeforeEach
     void setUp() {
-        var getConversionRateService = new GetConversionRateService(exchangeRateApiRestClient, repository);
-        exchangeRateController = new ExchangeRateController(getConversionRateService);
+        getConversionRateService = new GetConversionRateService(exchangeRateApiRestClient, repository);
     }
 
     @Test
@@ -46,10 +42,18 @@ class ExchangeRateControllerTest {
         when(exchangeRateApiRestClient.pairConversion(anyString(), anyString())).thenReturn(ExchangeRateTestFactory.oneExchangeRateApiResponse());
         when(repository.save(any())).thenReturn(ExchangeRateTestFactory.oneExchangeRate());
 
-        Response response = exchangeRateController.getConversionRate(rateBase, rateTarget);
+        getConversionRateService.handle(rateBase, rateTarget);
+    }
 
-        assertNotNull(response);
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    @Test
+    @DisplayName("Given invalid parameters should return ErrorConsultingRateException")
+    void shouldReturnErrorConsultingRateException() {
+        var rateBase = "BRL1234";
+        var rateTarget = "USD5678";
+
+        when(exchangeRateApiRestClient.pairConversion(anyString(), anyString())).thenReturn(null);
+
+        assertThrows(ErrorConsultingRateException.class, () -> getConversionRateService.handle(rateBase, rateTarget));
     }
 
 }
